@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CIKUYA STORE - PRICELIST & ORDER</title>
+
+<!-- PWA META TAGS -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#00ff41">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="CIKUYA">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@600;700&family=Chakra+Petch:ital,wght@0,600;0,700;1,700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #05070f;
+  color: #fff;
+  font-family: 'Chakra Petch', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 15px;
+}
+
+/* CONTAINER UTAMA / FRAME E-SPORTS */
+.poster {
+  width: 100%;
+  max-width: 720px;
+  background: radial-gradient(circle at center, #0b1528 0%, #040711 100%);
+  border: 2px solid #00d2ff;
+  border-radius: 16px;
+  padding: 25px 20px;
+  box-shadow: 0 0 25px rgba(0, 210, 255, 0.3), inset 0 0 15px rgba(0, 210, 255, 0.2);
+  position: relative;
+}
+
+/* BRAND LOGO HEADER */
+.brand {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.brand h1 {
+  font-family: 'Teko', sans-serif;
+  font-size: 42px;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: 2px;
+  color: #ffffff;
+  text-shadow: 0 0 10px #00d2ff, 0 0 20px #00d2ff;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+.brand p {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: #38bdf8;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* MUSIC PLAYER INLINE */
+.music-box {
+  background: rgba(15, 25, 45, 0.9);
+  border: 1px solid #00d2ff;
+  border-radius: 8px;
+  padding: 6px 12px;
+  margin: -10px auto 15px auto;
+  max-width: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.music-info { font-size: 11px; color: #38bdf8; font-style: italic; }
+.music-controls button {
+  background: #00d2ff; border: none; color: #000;
+  width: 26px; height: 26px; border-radius: 4px;
+  font-weight: bold; cursor: pointer; margin-left: 2px;
+}
+
+/* GRID 2 KOLOM UTAMA */
+.grid-container {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 650px) {
+  .grid-container { grid-template-columns: 1fr; }
+}
+
+/* KOTAK HARGA (PANEL) */
+.panel {
+  background: rgba(8, 15, 30, 0.85);
+  border: 1px solid #00d2ff;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: inset 0 0 10px rgba(0, 210, 255, 0.15);
+}
+
+.panel-title {
+  background: linear-gradient(90deg, rgba(0,210,255,0.2) 0%, rgba(0,210,255,0.05) 100%);
+  border-bottom: 2px solid #00d2ff;
+  padding: 6px 10px;
+  font-size: 15px;
+  font-weight: 700;
+  font-style: italic;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 6px 6px 0 0;
+  text-transform: uppercase;
+}
+
+/* LIST TABEL LEFT (VPN INDONESIA) */
+.list-box {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 8px;
+}
+.list-item {
+  display: flex;
+  align-items: center;
+  background: rgba(15, 25, 45, 0.9);
+  border: 1px solid rgba(0, 210, 255, 0.3);
+  border-radius: 6px;
+  padding: 5px 8px;
+  font-weight: 700;
+}
+.list-item .no {
+  background: #00d2ff;
+  color: #000;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  font-size: 10px;
+  margin-right: 6px;
+}
+.list-item .harga {
+  font-size: 13px;
+  font-style: italic;
+  color: #fff;
+}
+.list-item .durasi {
+  margin-left: auto;
+  font-size: 10px;
+  color: #38bdf8;
+  font-style: italic;
+}
+.badge-ip {
+  background: #3b82f6;
+  color: #fff;
+  font-size: 8px;
+  padding: 1px 4px;
+  border-radius: 3px;
+  margin-left: 5px;
+}
+
+/* TABEL RIGHT (TEMBAK PAKET XL) */
+.table-custom {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 5px;
+  margin-top: 2px;
+}
+.table-custom th {
+  font-size: 8px;
+  color: #94a3b8;
+  text-transform: uppercase;
+  padding: 3px 2px;
+}
+.table-custom td {
+  background: rgba(15, 25, 45, 0.9);
+  border-top: 1px solid rgba(0, 210, 255, 0.3);
+  border-bottom: 1px solid rgba(0, 210, 255, 0.3);
+  padding: 5px 3px;
+  font-size: 10px;
+  text-align: center;
+  font-weight: 700;
+}
+.table-custom td:first-child {
+  border-left: 1px solid rgba(0, 210, 255, 0.3);
+  border-radius: 6px 0 0 6px;
+  text-align: left;
+  padding-left: 6px;
+}
+.table-custom td:last-child {
+  border-right: 1px solid rgba(0, 210, 255, 0.3);
+  border-radius: 0 6px 6px 0;
+  color: #a855f7;
+  font-style: italic;
+  font-size: 11px;
+}
+.badge-sub {
+  display: inline-block;
+  background: #16a34a;
+  color: #fff;
+  font-size: 7px;
+  padding: 1px 3px;
+  border-radius: 3px;
+}
+
+/* PRICE TAG VARIATION */
+.price-only { color: #38bdf8; display: block; }
+.price-vpn { color: #f43f5e; display: block; font-size: 10px; }
+
+/* FORM ORDER & WHATSAPP BUTTON */
+.order-section {
+  margin-top: 15px;
+  background: rgba(8, 15, 30, 0.85);
+  border: 1px solid #00d2ff;
+  border-radius: 10px;
+  padding: 15px;
+}
+.order-section h3 {
+  font-size: 14px;
+  color: #00d2ff;
+  font-style: italic;
+  margin-bottom: 10px;
+  text-align: left;
+}
+.order-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+@media (max-width: 480px) {
+  .order-form { grid-template-columns: 1fr; }
+}
+.order-form input, .order-form select {
+  width: 100%;
+  padding: 8px 10px;
+  background: rgba(15, 25, 45, 0.9);
+  border: 1px solid rgba(0, 210, 255, 0.4);
+  border-radius: 6px;
+  color: #fff;
+  font-family: 'Chakra Petch', sans-serif;
+  font-size: 12px;
+}
+
+/* PREVIEW GELEMBUNG CHAT */
+.order-preview-box {
+  grid-column: 1 / -1;
+  background: rgba(245, 245, 245, 0.95);
+  color: #222;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 13px;
+  line-height: 1.5;
+  margin-top: 5px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  font-family: sans-serif;
+}
+.order-preview-box .preview-title {
+  font-size: 10px;
+  font-weight: bold;
+  color: #666;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.btn-wa {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(90deg, #25d366 0%, #128c7e 100%);
+  color: #fff;
+  font-weight: 700;
+  font-style: italic;
+  text-transform: uppercase;
+  padding: 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 5px;
+  box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);
+  transition: 0.2s;
+}
+.btn-wa:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(37, 211, 102, 0.6);
+}
+
+/* FOOTER BADGES GARANSI */
+.footer-badges {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(0, 210, 255, 0.2);
+}
+.badge-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+.badge-item span { color: #fff; display: block; }
+</style>
+</head>
+<body>
+
+<div class="poster">
+  <!-- HEADER STORE -->
+  <div class="brand">
+    <h1>♪cikuya♦store♪</h1>
+    <p>FAST • TRUSTED • SECURE</p>
+  </div>
+
+  <!-- MUSIC PLAYER -->
+  <div class="music-box">
+    <div class="music-info" id="judulLagu">🎵 Background Music</div>
+    <div class="music-controls">
+      <button onclick="toggleMusic()">🔊</button>
+    </div>
+  </div>
+  <audio id="bgm" loop></audio>
+
+  <!-- CONTAINER 2 KOLOM -->
+  <div class="grid-container">
+    
+    <!-- KOLOM KIRI: VPN INDONESIA -->
+    <div class="panel">
+      <div class="panel-title">
+        🛡️ VPN INDONESIA
+      </div>
+      <div class="list-box">
+        <div class="list-item">
+          <span class="no">1.</span>
+          <span class="harga">Rp 2.000</span>
+          <span class="durasi">( 3 HARI / 1 IP )</span>
+        </div>
+        <div class="list-item">
+          <span class="no">2.</span>
+          <span class="harga">Rp 4.000</span>
+          <span class="durasi">( 7 HARI / 1 IP )</span>
+        </div>
+        <div class="list-item">
+          <span class="no">3.</span>
+          <span class="harga">Rp 5.000</span>
+          <span class="durasi">( 14 HARI / 1 IP )</span>
+        </div>
+        <div class="list-item">
+          <span class="no">4.</span>
+          <span class="harga">Rp 8.000</span>
+          <span class="durasi">( 30 HARI / 1 IP )</span>
+        </div>
+        <div class="list-item">
+          <span class="no">5.</span>
+          <span class="harga">Rp 10.000</span>
+          <span class="badge-ip">MAX 2 IP</span>
+          <span class="durasi">( 30 HARI )</span>
+        </div>
+        <div class="list-item">
+          <span class="no">6.</span>
+          <span class="harga">Rp 13.000</span>
+          <span class="badge-ip">MAX 3 IP</span>
+          <span class="durasi">( 30 HARI )</span>
+        </div>
+        <div class="list-item">
+          <span class="no">7.</span>
+          <span class="harga">Rp 15.000</span>
+          <span class="badge-ip" style="background:#e11d48;">MAX 5 IP</span>
+          <span class="durasi">( 30 HARI )</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- KOLOM KANAN: TEMBAK PAKET XL -->
+    <div class="panel">
+      <div class="panel-title" style="border-color:#a855f7;">
+        ⚡ TEMBAK PAKET XL
+      </div>
+      <table class="table-custom">
+        <thead>
+          <tr>
+            <th>PAKET</th>
+            <th>KUOTA</th>
+            <th>HARGA</th>
+            <th>AKTIF</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1. XL EDUKASI<br><span class="badge-sub">REKOMENDASI</span></td>
+            <td>15GB 🎓</td>
+            <td>
+              <span class="price-only">Rp 12k <small style="font-size:7px;color:#aaa">(Data Only)</small></span>
+              <span class="price-vpn">Rp 15k <small style="font-size:7px;color:#fca5a5">(Data + VPN)</small></span>
+            </td>
+            <td>7<br><small style="font-size:8px">HARI</small></td>
+          </tr>
+          <tr>
+            <td>2. XL EXTRA KUOTA<br><span class="badge-sub" style="background:#9333ea;">PILIHAN HEMAT</span></td>
+            <td>30GB ☁️</td>
+            <td>
+              <span class="price-only">Rp 17k <small style="font-size:7px;color:#aaa">(Data Only)</small></span>
+              <span class="price-vpn">Rp 25k <small style="font-size:7px;color:#fca5a5">(Data + VPN)</small></span>
+            </td>
+            <td>30<br><small style="font-size:8px">HARI</small></td>
+          </tr>
+          <tr>
+            <td>3. XL CONFERENCE<br><span class="badge-sub" style="background:#2563eb;">COCOK ALL TKP</span></td>
+            <td>15GB♥</td>
+            <td>
+              <span class="price-only">Rp 15k <small style="font-size:7px;color:#aaa">(Data Only)</small></span>
+              <span class="price-vpn">Rp 17k <small style="font-size:7px;color:#fca5a5">(Data + VPN)</small></span>
+            </td>
+            <td>7<br><small style="font-size:8px">HARI</small></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- FORM ORDER VIA WHATSAPP -->
+  <div class="order-section">
+    <h3>🛒 FORM PEMESANAN QUICK ORDER</h3>
+    <form id="orderForm" class="order-form">
+      <input type="text" id="username" placeholder="Masukkan Username / No. HP" oninput="updatePreview()" required>
+      
+      <select id="layanan" onchange="updatePreview()" style="grid-column: 1 / -1;" required>
+        <option value="">-- Pilih Paket & Varian --</option>
+        <optgroup label="🛡️ VPN Indonesia">
+          <option value="VPN ID (3 Hari / 1 IP - Rp 2.000)">VPN ID 3 Hari (1 IP) - Rp 2.000</option>
+          <option value="VPN ID (7 Hari / 1 IP - Rp 4.000)">VPN ID 7 Hari (1 IP) - Rp 4.000</option>
+          <option value="VPN ID (14 Hari / 1 IP - Rp 5.000)">VPN ID 14 Hari (1 IP) - Rp 5.000</option>
+          <option value="VPN ID Bulanan (30 Hari / 1 IP - Rp 8.000)">VPN ID 30 Hari (1 IP) - Rp 8.000</option>
+          <option value="VPN ID Bulanan (30 Hari / Max 2 IP - Rp 10.000)">VPN ID 30 Hari (Max 2 IP) - Rp 10.000</option>
+          <option value="VPN ID Bulanan (30 Hari / Max 3 IP - Rp 13.000)">VPN ID 30 Hari (Max 3 IP) - Rp 13.000</option>
+          <option value="VPN ID Bulanan (30 Hari / Max 5 IP - Rp 15.000)">VPN ID 30 Hari (Max 5 IP) - Rp 15.000</option>
+        </optgroup>
+        <optgroup label="📦 XL Edukasi 15GB (7 Hari)">
+          <option value="XL Edukasi 15GB (Data Only - Rp 12.000)">XL Edukasi 15GB [Data Only] - Rp 12.000</option>
+          <option value="XL Edukasi 15GB + VPN 7 Hari (Rp 15.000)">XL Edukasi 15GB [Data + VPN 7 Hari] - Rp 15.000</option>
+        </optgroup>
+        <optgroup label="📦 XL Extra Kuota 30GB (30 Hari)">
+          <option value="XL Extra Kuota 30GB (Data Only - Rp 17.000)">XL Extra Kuota 30GB [Data Only] - Rp 17.000</option>
+          <option value="XL Extra Kuota 30GB + VPN 30 Hari (Rp 25.000)">XL Extra Kuota 30GB [Data + VPN 30 Hari] - Rp 25.000</option>
+        </optgroup>
+        <optgroup label="📦 XL Conference 15GB (7 Hari)">
+          <option value="XL Conference 15GB (Data Only - Rp 15.000)">XL Conference 15GB [Data Only] - Rp 15.000</option>
+          <option value="XL Conference 15GB + VPN 7 Hari (Rp 17.000)">XL Conference 15GB [Data + VPN 7 Hari] - Rp 17.000</option>
+        </optgroup>
+      </select>
+
+      <!-- PREVIEW GELEMBUNG CHAT -->
+      <div class="order-preview-box">
+        <span class="preview-title">Preview Pesanan WhatsApp:</span>
+        <div id="previewText">Halo Admin Cikuya Store, saya mau order: • Username: [User] • Pilihan Paket: [Belum dipilih] Mohon diproses, terima kasih!</div>
+      </div>
+
+      <button type="submit" class="btn-wa">💬 Buka Aplikasi / Kirim WA</button>
+    </form>
+  </div>
+
+  <!-- FOOTER GARANSI -->
+  <div class="footer-badges">
+    <div class="badge-item">🛡️ <span>AMAN 100%</span></div>
+    <div class="badge-item">⚡ <span>CEPAT STABIL</span></div>
+    <div class="badge-item">🤝 <span>TRUSTED TERPERCAYA</span></div>
+    <div class="badge-item">🛒 <span>KEPEMILIKAN: CIKUYA_STORE</span></div>
+  </div>
+</div>
+
+<script>
+// REGISTRASI SERVICE WORKER DENGAN BYPASS CACHE (Agar tidak usah ubah sw.js)
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js?v=' + Date.now());
+}
+
+// UPDATE PREVIEW REAL-TIME
+function updatePreview() {
+  var user = document.getElementById('username').value || "[User]";
+  var layanan = document.getElementById('layanan').value || "[Belum dipilih]";
+  
+  var text = "Halo Admin Cikuya Store, saya mau order:\n" +
+             "• Username: " + user + "\n" +
+             "• Pilihan Paket: " + layanan + "\n\n" +
+             "Mohon diproses, terima kasih!";
+             
+  document.getElementById('previewText').innerText = text;
+}
+
+// SCRIPT ORDER WHATSAPP
+document.getElementById('orderForm').onsubmit = function(e) {
+  e.preventDefault();
+  var user = document.getElementById('username').value;
+  var layanan = document.getElementById('layanan').value;
+  var nomorAdmin = "6283845286102";
+
+  var pesan = "Halo Admin Cikuya Store, saya mau order:%0A%0A" +
+              "• Username: " + encodeURIComponent(user) + "%0A" +
+              "• Pilihan Paket: " + encodeURIComponent(layanan) + "%0A%0A" +
+              "Mohon diproses, terima kasih!";
+  
+  window.open("https://wa.me/" + nomorAdmin + "?text=" + pesan, '_blank');
+};
+
+// SCRIPT MUSIC PLAYER (DISESUAIKAN DENGAN MUSIK4.MP3)
+let music = document.getElementById('bgm');
+music.src = "musik4.mp3"; 
+music.volume = 0.3; 
+
+function toggleMusic(){
+  if(music.paused){ 
+    music.play(); 
+  } else { 
+    music.pause(); 
+  }
+}
+</script>
+
+</body>
+  </html>
+  
