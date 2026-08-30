@@ -260,6 +260,7 @@ body {
   margin-top: 5px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.3);
   font-family: sans-serif;
+  white-space: pre-line;
 }
 .order-preview-box .preview-title {
   font-size: 10px;
@@ -339,7 +340,7 @@ body {
     <!-- KOLOM KIRI: VPN INDONESIA -->
     <div class="panel">
       <div class="panel-title">
-        🛡️ VPN INDONESIA
+        🛡️ VPN INDONESIA VIP ISP BIZNET & HERZA
       </div>
       <div class="list-box">
         <div class="list-item">
@@ -435,40 +436,60 @@ body {
   <div class="order-section">
     <h3>🛒 FORM PEMESANAN QUICK ORDER</h3>
     <form id="orderForm" class="order-form">
-      <input type="text" id="username" placeholder="Masukkan Username / No. HP" oninput="updatePreview()" required>
+      <input type="text" id="username" placeholder="Masukkan Nama / Username" oninput="updatePreview()" required>
       
-      <select id="layanan" onchange="updatePreview()" style="grid-column: 1 / -1;" required>
-        <option value="">-- Pilih Paket & Varian --</option>
-        <optgroup label="🛡️ VPN Indonesia">
-          <option value="VPN ID (3 Hari / 1 IP - Rp 2.000)">VPN ID 3 Hari (1 IP) - Rp 2.000</option>
-          <option value="VPN ID (7 Hari / 1 IP - Rp 4.000)">VPN ID 7 Hari (1 IP) - Rp 4.000</option>
-          <option value="VPN ID (14 Hari / 1 IP - Rp 5.000)">VPN ID 14 Hari (1 IP) - Rp 5.000</option>
-          <option value="VPN ID Bulanan (30 Hari / 1 IP - Rp 8.000)">VPN ID 30 Hari (1 IP) - Rp 8.000</option>
-          <option value="VPN ID Bulanan (30 Hari / Max 2 IP - Rp 10.000)">VPN ID 30 Hari (Max 2 IP) - Rp 10.000</option>
-          <option value="VPN ID Bulanan (30 Hari / Max 3 IP - Rp 13.000)">VPN ID 30 Hari (Max 3 IP) - Rp 13.000</option>
-          <option value="VPN ID Bulanan (30 Hari / Max 5 IP - Rp 15.000)">VPN ID 30 Hari (Max 5 IP) - Rp 15.000</option>
+      <select id="tkp" onchange="updatePreview()" required>
+        <option value="">-- Pilih TKP / Lokasi --</option>
+        <option value="DKI Jakarta / Jabodetabek">DKI Jakarta / Jabodetabek</option>
+        <option value="Jawa Barat">Jawa Barat</option>
+        <option value="Jawa Tengah / DIY">Jawa Tengah / DIY</option>
+        <option value="Jawa Timur">Jawa Timur</option>
+        <option value="Sumatra">Sumatra</option>
+        <option value="Kalimantan">Kalimantan</option>
+        <option value="Sulawesi">Sulawesi</option>
+        <option value="Bali & Nusa Tenggara">Bali & Nusa Tenggara</option>
+        <option value="Papua & Maluku">Papua & Maluku</option>
+      </select>
+
+      <select id="layanan" onchange="toggleNomorField(); updatePreview();" style="grid-column: 1 / -1;" required>
+        <option value="" data-type="none">-- Pilih Paket & Varian --</option>
+        <optgroup label="🛡️ VPN Indonesia (Hanya Akun VPN)">
+          <option value="VPN ID (3 Hari / 1 IP - Rp 2.000)" data-type="vpn">VPN ID 3 Hari (1 IP) - Rp 2.000</option>
+          <option value="VPN ID (7 Hari / 1 IP - Rp 4.000)" data-type="vpn">VPN ID 7 Hari (1 IP) - Rp 4.000</option>
+          <option value="VPN ID (14 Hari / 1 IP - Rp 5.000)" data-type="vpn">VPN ID 14 Hari (1 IP) - Rp 5.000</option>
+          <option value="VPN ID Bulanan (30 Hari / 1 IP - Rp 8.000)" data-type="vpn">VPN ID 30 Hari (1 IP) - Rp 8.000</option>
+          <option value="VPN ID Bulanan (30 Hari / Max 2 IP - Rp 10.000)" data-type="vpn">VPN ID 30 Hari (Max 2 IP) - Rp 10.000</option>
+          <option value="VPN CLOUDFRONT Bulanan (30 Hari / Max 3 IP - Rp 13.000)" data-type="vpn">VPN CLOUDFRONT 30 Hari (Max 3 IP) - Rp 13.000</option>
+          <option value="VPN CLOUDFRONT Bulanan (30 Hari / Max 5 IP - Rp 15.000)" data-type="vpn">VPN ID 30 Hari (Max 5 IP) - Rp 15.000</option>
         </optgroup>
         <optgroup label="📦 XL Edukasi 15GB (7 Hari)">
-          <option value="XL Edukasi 15GB (Data Only - Rp 12.000)">XL Edukasi 15GB [Data Only] - Rp 12.000</option>
-          <option value="XL Edukasi 15GB + VPN 7 Hari (Rp 15.000)">XL Edukasi 15GB [Data + VPN 7 Hari] - Rp 15.000</option>
+          <option value="XL Edukasi 15GB (Data Only - Rp 12.000)" data-type="paket">XL Edukasi 15GB [Data Only] - Rp 12.000</option>
+          <option value="XL Edukasi 15GB + VPN 7 Hari (Rp 15.000)" data-type="paket">XL Edukasi 15GB [Data + VPN 7 Hari] - Rp 15.000</option>
         </optgroup>
         <optgroup label="📦 XL Extra Kuota 30GB (30 Hari)">
-          <option value="XL Extra Kuota 30GB (Data Only - Rp 17.000)">XL Extra Kuota 30GB [Data Only] - Rp 17.000</option>
-          <option value="XL Extra Kuota 30GB + VPN 30 Hari (Rp 25.000)">XL Extra Kuota 30GB [Data + VPN 30 Hari] - Rp 25.000</option>
+          <option value="XL Extra Kuota 30GB (Data Only - Rp 17.000)" data-type="paket">XL Extra Kuota 30GB [Data Only] - Rp 17.000</option>
+          <option value="XL Extra Kuota 30GB + VPN 30 Hari (Rp 25.000)" data-type="paket">XL Extra Kuota 30GB [Data + VPN 30 Hari] - Rp 25.000</option>
         </optgroup>
         <optgroup label="📦 XL Conference 15GB (7 Hari)">
-          <option value="XL Conference 15GB (Data Only - Rp 15.000)">XL Conference 15GB [Data Only] - Rp 15.000</option>
-          <option value="XL Conference 15GB + VPN 7 Hari (Rp 17.000)">XL Conference 15GB [Data + VPN 7 Hari] - Rp 17.000</option>
+          <option value="XL Conference 15GB (Data Only - Rp 15.000)" data-type="paket">XL Conference 15GB [Data Only] - Rp 15.000</option>
+          <option value="XL Conference 15GB + VPN 7 Hari (Rp 17.000)" data-type="paket">XL Conference 15GB [Data + VPN 7 Hari] - Rp 17.000</option>
         </optgroup>
       </select>
+
+      <input type="tel" id="nomorHp" placeholder="Nomor XL Tujuan (Wajib diisi untuk Paket Kuota)" oninput="updatePreview()" style="grid-column: 1 / -1; display: none;">
 
       <!-- PREVIEW GELEMBUNG CHAT -->
       <div class="order-preview-box">
         <span class="preview-title">Preview Pesanan WhatsApp:</span>
-        <div id="previewText">Halo Admin Cikuya Store, saya mau order: • Username: [User] • Pilihan Paket: [Belum dipilih] Mohon diproses, terima kasih!</div>
+        <div id="previewText">Halo Admin Cikuya Store, saya mau order:
+• Nama: [User]
+• TKP: [Belum dipilih]
+• Pilihan Paket: [Belum dipilih]
+
+Mohon diproses, terima kasih!</div>
       </div>
 
-      <button type="submit" class="btn-wa">💬 Buka Aplikasi / Kirim WA</button>
+      <button type="submit" class="btn-wa">💬 Order? klik disini Sekarang!</button>
     </form>
   </div>
 
@@ -477,25 +498,53 @@ body {
     <div class="badge-item">🛡️ <span>AMAN 100%</span></div>
     <div class="badge-item">⚡ <span>CEPAT STABIL</span></div>
     <div class="badge-item">🤝 <span>TRUSTED TERPERCAYA</span></div>
-    <div class="badge-item">🛒 <span>KEPEMILIKAN: CIKUYA_STORE</span></div>
+    <div class="badge-item">🛒 <span>TOKO CONFIG TERBAIK TAHUN INI: CIKUYA DIGITAL STORE 2026</span></div>
   </div>
 </div>
 
 <script>
-// REGISTRASI SERVICE WORKER DENGAN BYPASS CACHE (Agar tidak usah ubah sw.js)
+// REGISTRASI SERVICE WORKER DENGAN BYPASS CACHE
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js?v=' + Date.now());
+}
+
+// TOGGLE INPUT NOMOR HP BERDASARKAN JENIS PAKET
+function toggleNomorField() {
+  var layananSelect = document.getElementById('layanan');
+  var selectedOption = layananSelect.options[layananSelect.selectedIndex];
+  var type = selectedOption.getAttribute('data-type');
+  var nomorInput = document.getElementById('nomorHp');
+
+  if (type === 'paket') {
+    nomorInput.style.display = 'block';
+    nomorInput.required = true;
+  } else {
+    nomorInput.style.display = 'none';
+    nomorInput.required = false;
+    nomorInput.value = '';
+  }
 }
 
 // UPDATE PREVIEW REAL-TIME
 function updatePreview() {
   var user = document.getElementById('username').value || "[User]";
+  var tkp = document.getElementById('tkp').value || "[Belum dipilih]";
   var layanan = document.getElementById('layanan').value || "[Belum dipilih]";
-  
+  var nomor = document.getElementById('nomorHp').value;
+  var layananSelect = document.getElementById('layanan');
+  var selectedOption = layananSelect.options[layananSelect.selectedIndex];
+  var type = selectedOption.getAttribute('data-type');
+
   var text = "Halo Admin Cikuya Store, saya mau order:\n" +
-             "• Username: " + user + "\n" +
-             "• Pilihan Paket: " + layanan + "\n\n" +
-             "Mohon diproses, terima kasih!";
+             "• Nama: " + user + "\n" +
+             "• TKP: " + tkp + "\n" +
+             "• Pilihan Paket: " + layanan;
+
+  if (type === 'paket') {
+    text += "\n• Nomor Tujuan: " + (nomor || "[Wajib diisi]");
+  }
+
+  text += "\n\nMohon diproses, terima kasih!";
              
   document.getElementById('previewText').innerText = text;
 }
@@ -504,18 +553,29 @@ function updatePreview() {
 document.getElementById('orderForm').onsubmit = function(e) {
   e.preventDefault();
   var user = document.getElementById('username').value;
+  var tkp = document.getElementById('tkp').value;
   var layanan = document.getElementById('layanan').value;
+  var nomor = document.getElementById('nomorHp').value;
+  var layananSelect = document.getElementById('layanan');
+  var selectedOption = layananSelect.options[layananSelect.selectedIndex];
+  var type = selectedOption.getAttribute('data-type');
   var nomorAdmin = "6283845286102";
 
-  var pesan = "Halo Admin Cikuya Store, saya mau order:%0A%0A" +
-              "• Username: " + encodeURIComponent(user) + "%0A" +
-              "• Pilihan Paket: " + encodeURIComponent(layanan) + "%0A%0A" +
-              "Mohon diproses, terima kasih!";
+  var pesanTeks = "Halo Admin Cikuya Store, saya mau order:\n\n" +
+                  "• Nama: " + user + "\n" +
+                  "• TKP: " + tkp + "\n" +
+                  "• Pilihan Paket: " + layanan;
+
+  if (type === 'paket') {
+    pesanTeks += "\n• Nomor Tujuan: " + nomor;
+  }
+
+  pesanTeks += "\n\nMohon diproses, terima kasih!";
   
-  window.open("https://wa.me/" + nomorAdmin + "?text=" + pesan, '_blank');
+  window.open("https://wa.me/" + nomorAdmin + "?text=" + encodeURIComponent(pesanTeks), '_blank');
 };
 
-// SCRIPT MUSIC PLAYER (DISESUAIKAN DENGAN MUSIK4.MP3)
+// SCRIPT MUSIC PLAYER
 let music = document.getElementById('bgm');
 music.src = "musik4.mp3"; 
 music.volume = 0.3; 
@@ -531,4 +591,4 @@ function toggleMusic(){
 
 </body>
   </html>
-  
+      
